@@ -2,6 +2,7 @@
 
 <form nethod="post">
     <label for="firstname">First Name</label>
+    <!-- Both the name and id attributes are necessary. The id attribute is neccessary to associate the input to the label, the name attribute is how PHP identifies and utilizes the data of the input -->
     <input type="text" name="firstname" id="firstname">
     <label for="lastname">Last Name</label>
     <input type="text" name="lastname" id="lastname">
