@@ -23,6 +23,9 @@ if (isset($_POST['submit'])) {
             ":" . implode(", :", array_keys($new_user))
         );
 
+        $statement = $connection->prepare($sql);
+        $statement->execute($new_user);
+
     } catch (PDOException $error) {
         echo $sql . "<br>" . $error->getMessage();
     }
@@ -34,7 +37,12 @@ if (isset($_POST['submit'])) {
 
 <?php include "templates/header.php"; ?>
 
-<form nethod="post">
+<!-- If a $_POST was submitted and if a $statement was successful, print a success message that includes the first name of the successfully added user -->
+<?php if (isset($_POST['submit']) && $statement) { ?>
+<blockquote><?php echo escape($_POST['firstname']); ?> successfully added.</blockquote>
+<?php } ?>
+
+<form method="post">
     <label for="firstname">First Name</label>
     <!-- Both the name and id attributes are necessary. The id attribute is neccessary to associate the input to the label, the name attribute is how PHP identifies and utilizes the data of the input -->
     <input type="text" name="firstname" id="firstname">
