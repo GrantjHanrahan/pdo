@@ -1,3 +1,37 @@
+<?php 
+
+if (isset($_POST['submit'])) {
+    require "../config.php";
+
+    try {
+        $connection = new PDO($dsn, $username, $password, $options);
+        // insert new user code will go here
+
+        $new_user = array(
+            "firstname"     => $_POST['firstname'],
+            "lastname"      => $_POST['lastname'],
+            "email"         => $_POST['email'],
+            "age"           => $_POST['age'],
+            "location"      => $_POST['location']
+        );
+
+        // The implode function is used to join elements of an array with a string
+        $sql = sprintf(
+            "INSERT INTO %s (%s) values (%s)",
+            "users",
+            implode(", ", array_keys($new_user)),
+            ":" . implode(", :", array_keys($new_user))
+        );
+
+    } catch (PDOException $error) {
+        echo $sql . "<br>" . $error->getMessage();
+    }
+
+
+}
+
+?>
+
 <?php include "templates/header.php"; ?>
 
 <form nethod="post">
