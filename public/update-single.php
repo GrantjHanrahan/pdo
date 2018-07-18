@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
 
 if (isset($_GET['id'])) {
     try {
-        echo $_GET['id']; // for testing purposes
+        // echo $_GET['id']; // for testing purposes
         $connection = new PDO($dsn, $username, $password, $options);
         $id = $_GET['id'];
 
